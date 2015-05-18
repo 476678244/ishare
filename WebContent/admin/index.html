@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ishare Admin</title>
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<link href="css/site.css" rel="stylesheet">
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="js/UrlParam.js" type="text/JavaScript"></script>
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+	<script src="js/adminPage.js" type="text/JavaScript"></script>
+	<script src="js/adminController.js" type="text/JavaScript"></script> 
+</head>
+<body>
+	<div class="container">
+		<ul class="nav nav-tabs" role="tablist">
+			<li role="presentation" id="tabUser" onclick="activeTabItem($(this))"><a href="index.html">Manage User</a></li>
+			<li role="presentation" id="tabOrder" onclick="activeTabItem($(this))"><a href="orders.html">Manage Order</a></li>
+			<li role="presentation"><a href="../page/adminLogin.html">Log out</a></li>
+		</ul>
+		<div class="row">
+			<div class="span9" id="div_users"></div>
+		</div>
+	</div>
+	<script> 
+		$(document).ready(function() {
+			var userId = UrlParm.parm("user_id");
+			if (userId > 0) {
+				getUser(userId, "div_users", document);
+			} else {
+				getUsers("div_users", document);
+			}
+			activeTabItem($("#tabUser"));
+		});
+		function activeTabItem(item) {
+			$("li").removeClass("active");
+			item.addClass("active");
+		}
+		function applyDeleteActionToDeleteButtons(usersModel) {
+			for (var i = 0; i < usersModel.length; i++) {
+				var user = usersModel[i];
+				var deleteOrderButtonIdSelector = "#deleteOrderButton" + user.id;
+				var deleteUserButtonIdSelector = "#deleteUserButton" + user.id;
+				$(deleteOrderButtonIdSelector).click(function() {
+					var userId = user.id;
+					var userNickName = user.nickname;
+					return function() {
+						if (confirm("This will delete " + userNickName + "`s orders!")) {
+							deleteUserOrders(userId);	
+						}
+					}
+				}());
+				$(deleteUserButtonIdSelector).click(function() {
+					var userId = user.id;
+					var userNickName = user.nickname;
+					return function() {
+						if (confirm("This will delete " + userNickName + "`s user information!")) {
+							deleteUser(userId);
+						}
+					}
+				}());
+			} 
+		}
+	</script>
+</body>
+</html>

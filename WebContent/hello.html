@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<head>
+<script src="js/jquery-1.11.1.js"></script>
+
+</head>
+<body class="body" id="1">
+	Home Page
+	<img src="http://ishareheadpictures.qiniudn.com/male_student.jpg" />
+	<div>
+		<br> User Related Buttons<br>
+		<button id="b">Get</button>
+
+		<button id="auth">get session id</button>
+
+		<button id="register">register</button>
+
+		<button id="regStraight">regStraight</button>
+
+		<button id="json">getJson</button>
+	</div>
+	<div>
+		<br> Order Related Buttons <br>
+		<button id="createOrder">createOrder</button>
+		<button id="createOrder2">createOrder2</button>
+
+		<button id="intoJoinOrder">intoJoinOrder</button>
+
+		<button id="getConcurrencyUtil">getConcurrencyUtil</button>
+	</div>
+
+    <form action="/ishare/request/hello/uploadfile" method="post" enctype="multipart/form-data">    
+    	<input type="file" name="file" />   
+  		<input type="submit" value="上传" />  
+  	</form>
+  	
+	<script>
+		$(document).ready(function() {
+			$("#b").click(function() {
+				$.get("/ishare/request/hello/get", function(string) {
+					alert(string);
+				});
+			});
+		});
+		$(document).ready(function() {
+			$("#auth").click(function() {
+				$.get("/ishare/request/hello/auth", function(string) {
+					alert(string);
+				});
+			});
+		});
+		$(document).ready(function() {
+			$("#regStraight").click(function() {
+				$.get("/ishare/request/hello/regStraight", function(string) {
+					alert(string);
+				});
+			});
+		});
+		$(document).ready(function() {
+			$("#json").click(function() {
+				$.get("/ishare/request/hello/json", function(result) {
+					alert(result);
+				});
+			});
+		});
+		$(document).ready(function() {
+			$("#createOrder").click(function() {
+				$.get("/ishare/request/hello/createOrder", function(result) {
+					alert(result);
+				});
+			});
+		});
+		$(document).ready(function() {
+			$("#createOrder2").click(function() {
+				$.get("/ishare/request/hello/createOrder2", function(result) {
+					alert(result);
+				});
+			});
+		});
+	</script>
+
+	<script>
+		$(document).ready(function() {
+			$("#register").click(function() {
+				var url = "/ishare/request/login/register?username=&password=123&role=passenger&job=student&gender=male&authNum=123";
+				var nickname = "宗涵";
+				$.post(url, {
+					nickname : nickname
+				}, function(string) {
+					alert(string);
+				});
+			});
+			$("#intoJoinOrder").click(function() {
+				$.get("/ishare/request/hello/intoJoinOrder",function(result) {
+					alert(result);
+				});
+			});
+			$("#getConcurrencyUtil").click(function() {
+				$.get("/ishare/request/hello/getConcurrencyUtil",function(result) {
+						alert(result);
+				});
+			});
+		});
+	</script>
+
+</body>
+</html>

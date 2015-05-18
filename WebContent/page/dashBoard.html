@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DashBoard</title>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+	<div>
+		<br>Dashboard<br>
+		<button id="getUsers">GetUsers</button>
+	</div>
+	<script>
+		$(document).ready(function() {
+			$("#getUsers").click(function() {
+				$.get("/ishare/request/admin/getUsers", function(string) {
+					alert(string);
+				});
+			});
+		});
+	</script>
+</body>
+</html>
